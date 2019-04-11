@@ -1,39 +1,33 @@
-//TS Types
-//String
-var aString;
-aString = 'lorem';
-//Number
-var aNumber;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+let aNumber;
 aNumber = 1;
-//Boolean
-var aBool;
+let aBool;
 aBool = true;
-//Any
-var aAny;
+let aAny;
 aAny = 5;
 aAny = 'lorem';
-//Arrays
-var arrString;
-var arrString2;
-var arrNumber;
+let arrString;
+let arrString2;
+let arrNumber;
 arrString = ['lorem', 'ipsum'];
-//Tuple
-var aTuple;
+let aTuple;
 aTuple = ['lorem', 1];
-//Viod
-var aaVoid = null;
+let aaVoid = null;
 function aVoid() {
     console.log('abc');
 }
 ;
-//Object
-var aObject;
+let aObject;
 aObject = {};
-//Never 
-var error = function (message) {
+let error = function (message) {
     throw new Error(message);
 };
-var sing = function () {
+const sing = function () {
     while (true) {
         console.log("Never gonna give you up");
         console.log("Never gonna let you down");
@@ -43,15 +37,12 @@ var sing = function () {
         console.log("Never gonna tell a lie and hurt you");
     }
 };
-//Enum
-var MovieGerne;
-(function (MovieGerne) {
-    MovieGerne[MovieGerne["romantic"] = 0] = "romantic";
-    MovieGerne[MovieGerne["horror"] = 1] = "horror";
-    MovieGerne[MovieGerne["komedia"] = 2] = "komedia";
-})(MovieGerne || (MovieGerne = {}));
-//console.log(MovieGerne.horror);
-//console.log(MovieGerne[1]);
+var MovieGenre;
+(function (MovieGenre) {
+    MovieGenre[MovieGenre["romantic"] = 0] = "romantic";
+    MovieGenre[MovieGenre["horror"] = 1] = "horror";
+    MovieGenre[MovieGenre["komedia"] = 2] = "komedia";
+})(MovieGenre || (MovieGenre = {}));
 var Coffee;
 (function (Coffee) {
     Coffee["cappuccino"] = "capuccino";
@@ -59,31 +50,25 @@ var Coffee;
     Coffee["flatwhite"] = "bia\u0142a";
     Coffee["espresso"] = "espresso";
 })(Coffee || (Coffee = {}));
-var book = {
+let aUnion;
+aUnion = 1;
+aUnion = 'lorem';
+let book = {
     title: 'Zbrodnia i kara',
     author: 'Fiodor Dostojewski',
     pages: 608,
     year: 1866
 };
-var aBook = function (book) {
+let aBook = function (book) {
     return book.title;
 };
-// let aBook = function(book: Book){
-//     return book.title;
-// };
-//console.log(aBook(book));
-//Generics
-var aGeneric = function (arr) {
+let aGeneric = function (arr) {
     return arr;
 };
-//console.log(aGeneric([1,2,3]))
-//console.log(aGeneric('dwa'));
-//Functions
-var aFunction = function (a, b) {
+let aFunction = function (a, b) {
     return (a + b).toString();
 };
-var aFunction2 = function (a, b) {
-    if (a === void 0) { a = 'Paweł'; }
+let aFunction2 = function (a = 'Paweł', b) {
     if (b == undefined) {
         return a;
     }
@@ -91,37 +76,35 @@ var aFunction2 = function (a, b) {
         return a + ' ' + b;
     }
 };
-var Rent = /** @class */ (function () {
-    function Rent() {
+class Rental {
+    print() {
+        console.log(this.borrow());
     }
-    return Rent;
-}());
-function MovieDecorator(constructor) {
-    console.log('Utworzono klase Movie');
 }
-//@MovieDecorator
-var Movie = /** @class */ (function () {
-    function Movie(_movie) {
+function MovieDecorator(constructor) {
+    console.log('Klasa Movie została zadeklarowana');
+}
+let Movie = class Movie {
+    constructor(_movie) {
         this.category = "Film";
         this.title = _movie.title;
         this.director = _movie.director;
         this.year = _movie.year;
         this.time = _movie.time;
-        this.gerne = MovieGerne[_movie.gerne];
+        this.genre = MovieGenre[_movie.genre];
     }
-    Movie.prototype.showTitle = function () {
-        return this.category + " " + this.title + " to " + this.gerne + " z " + this.year + " roku.";
-    };
-    return Movie;
-}());
-var movie1 = {
+    showTitle() {
+        return `${this.category} ${this.title} to ${this.genre} z ${this.year} roku.`;
+    }
+};
+Movie = __decorate([
+    MovieDecorator
+], Movie);
+let movie1 = {
     title: "Teksańska masakra piłą mechaniczną",
     director: 'Tobe Hooper',
     year: 1974,
     time: 83,
-    gerne: MovieGerne.horror
+    genre: MovieGenre.horror
 };
-// let m1 = new Movie(movie1);
-// let m2 = new Movie({title: '120 dni sodomy', director: 'Pasolini', gerne: MovieGerne.horror})
-// console.log(m1.showTitle());
-// console.log(m2.showTitle());
+let m1 = new Movie(movie1);

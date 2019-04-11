@@ -1,12 +1,3 @@
 # Podstawy TypeScript
 
-Typy zmiennych
-
-  - string
-  - number
-  - void
-  - array
-  - null
-  - undefined
-  - tuple
-  - enum
+[12.04.19 - Wprowadzenie do TypeScript i użycie w frameworku Vue](12.04.19 - Wprowadzenie do TypeScript i użycie w frameworku Vue.pdf)

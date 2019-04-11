@@ -1,12 +1,17 @@
 //TS Types
 
 //String
-let aString: string;
-aString = 'lorem';
+// let aString: string;
+// aString = 'lorem';
+
+// let aString = 'lorem';
+// aString = 1;
 
 //Number
 let aNumber: number;
 aNumber = 1;
+//aNumber = 0b101010;
+
 
 //Boolean
 let aBool: boolean;
@@ -56,7 +61,7 @@ const sing = function(): never {
 
 
 //Enum
-enum MovieGerne {
+enum MovieGenre {
     romantic,
     horror,
     komedia
@@ -71,6 +76,12 @@ enum Coffee {
     espresso = 'espresso'
 }
 //console.log(Coffee.black);
+
+//Union types
+let aUnion: string|number;
+
+aUnion = 1;
+aUnion = 'lorem';
 
 //Interfaces
 interface Book {
@@ -130,7 +141,7 @@ interface IMovie {
     director: string;
     year?: number;
     time?: number;
-    gerne: MovieGerne;
+    genre: MovieGenre;
 }
 
 
@@ -139,41 +150,50 @@ interface IMovieClass {
     director: string;
     year?: number;
     time?: number;
-    gerne: string;
+    genre: string;
     showTitle(): string;
-    borrow();
 }
 
-abstract class Rent {
-    public title;
-    abstract borrow():string;
-    show
+abstract class Rental {
+    abstract borrow() :string;
+    print() {
+        console.log(this.borrow());
+    }
 }
 
-function MovieDecorator(constructor) {
-    console.log('Utworzono klase Movie')
+function MovieDecorator(constructor: Function) {
+    console.log('Klasa Movie została zadeklarowana')
 }
 
-//@MovieDecorator
+@MovieDecorator
 class Movie implements IMovieClass {
     public title: string;
     public director: string;
     public year: number;
     public time: number;
-    public gerne: string;
+    public genre: string;
     private category: string = "Film";
 
     constructor(_movie: IMovie) {
+        //super();
         this.title = _movie.title;
         this.director = _movie.director;
         this.year = _movie.year;
         this.time =   _movie.time;
-        this.gerne = MovieGerne[_movie.gerne];
+        this.genre = MovieGenre[_movie.genre];
     }
 
-    showTitle() {
-        return `${this.category} ${this.title} to ${this.gerne} z ${this.year} roku.`;
+    showTitle(): string {
+        return `${this.category} ${this.title} to ${this.genre} z ${this.year} roku.`;
     }
+
+    // borrow(): string {
+    //     return `Wyporzyczyłeś ${this.title}.`
+    // }
+
+    // static hello(): string {
+    //     console.log('hello');
+    // }
 }  
 
 let movie1 = {
@@ -181,11 +201,13 @@ let movie1 = {
     director: 'Tobe Hooper',
     year: 1974,
     time: 83,
-    gerne: MovieGerne.horror
+    genre: MovieGenre.horror
 }
 
 
-// let m1 = new Movie(movie1);
-// let m2 = new Movie({title: '120 dni sodomy', director: 'Pasolini', gerne: MovieGerne.horror})
+let m1 = new Movie(movie1);
+// let m2 = new Movie({title: '120 dni sodomy', director: 'Pasolini', genre: MovieGerne.horror})
 // console.log(m1.showTitle());
 // console.log(m2.showTitle());
+//m1.print();
+//Movie.hello();
